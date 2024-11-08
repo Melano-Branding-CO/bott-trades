@@ -1,0 +1,73 @@
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import pandas as pd
+from sklearn.cluster import KMeans
+import spacy
+
+class NexioBot:
+    def __init__(self):
+        self.clientes = pd.DataFrame(columns=['Nombre', 'Email', 'Historial', 'Segmento'])
+        self.nlp = spacy.load("en_core_web_sm")
+
+    def cargar_clientes(self, archivo_clientes):
+        """
+        Cargar los datos de clientes desde un archivo CSV.
+        """
+        self.clientes = pd.read_csv(archivo_clientes)
+
+    def segmentar_clientes(self):
+        """
+        Segmentar a los clientes en grupos usando K-Means para optimizar las campañas de marketing.
+        """
+        kmeans = KMeans(n_clusters=3)
+        self.clientes['Segmento'] = kmeans.fit_predict(self.clientes[['Historial']])
+        print("Segmentación completada. Grupos asignados.")
+
+    def enviar_email(self, destinatario, asunto, mensaje):
+        """
+        Enviar un correo electrónico a un cliente con personalización.
+        """
+        remitente = "tuemail@dominio.com"
+        password = "tu_password"
+
+        msg = MIMEMultipart()
+        msg['From'] = remitente
+        msg['To'] = destinatario
+        msg['Subject'] = asunto
+
+        msg.attach(MIMEText(mensaje, 'plain'))
+
+        try:
+            servidor = smtplib.SMTP('smtp.gmail.com', 587)
+            servidor.starttls()
+            servidor.login(remitente, password)
+            servidor.sendmail(remitente, destinatario, msg.as_string())
+            servidor.quit()
+            print(f"Correo enviado a {destinatario}")
+        except Exception as e:
+            print(f"Error al enviar correo: {str(e)}")
+
+    def automatizar_respuesta_redes(self, mensaje_entrada):
+        """
+        Generar una respuesta automática a mensajes en redes sociales basado en el análisis de NLP.
+        """
+        doc = self.nlp(mensaje_entrada)
+        if "soporte" in doc.text:
+            return "Gracias por contactarnos. Nuestro equipo de soporte está a tu disposición."
+        else:
+            return "Gracias por tu mensaje. Pronto nos pondremos en contacto contigo."
+
+    def enviar_campana_masiva(self, asunto, mensaje_base):
+        """
+        Enviar una campaña de correos electrónicos personalizada a todos los clientes.
+        """
+        for index, cliente in self.clientes.iterrows():
+            mensaje_personalizado = mensaje_base.replace("{nombre}", cliente['Nombre'])
+            self.enviar_email(cliente['Email'], asunto, mensaje_personalizado)
+
+# Ejemplo de uso
+nexio = NexioBot()
+nexio.cargar_clientes('clientes.csv')
+nexio.segmentar_clientes()
+nexio.enviar_campana_masiva("Nueva Oferta", "Hola {nombre}, tenemos una oferta especial para ti.")

@@ -1,0 +1,68 @@
+
+# Guía de Configuración para TitanAI Trading Bot
+
+Esta guía proporciona instrucciones detalladas para configurar y ejecutar el bot de trading **TitanAI** desde cero.
+
+## Requisitos
+
+1. **Python 3.x**: Asegúrate de tener Python 3 instalado. Puedes verificar si está instalado abriendo una terminal y ejecutando:
+   ```bash
+   python --version
+   ```
+   Si no está instalado, descárgalo desde [Python.org](https://www.python.org/downloads/).
+
+2. **Librerías Necesarias**: Este bot requiere las siguientes librerías de Python:
+   - `tkinter`: Para la interfaz gráfica.
+   - `random`: Para cálculos aleatorios de volatilidad.
+
+   `tkinter` suele venir preinstalado con Python. Si no lo tienes, instálalo ejecutando:
+   ```bash
+   sudo apt-get install python3-tk
+   ```
+   Para Windows, `tkinter` debería instalarse junto con Python.
+
+3. **Configurar el Archivo del Bot**:
+   - Descarga el archivo `TitanAI_trading_bot.py` que contiene el código del bot.
+
+## Instrucciones para Ejecutar el Bot
+
+1. **Abrir la Terminal o el Símbolo del Sistema**:
+   - Dirígete al directorio donde guardaste el archivo `TitanAI_trading_bot.py`.
+   - Utiliza el comando `cd` para navegar hasta esa carpeta. Por ejemplo:
+     ```bash
+     cd /ruta/a/tu/carpeta
+     ```
+
+2. **Ejecutar el Archivo del Bot**:
+   - Una vez en el directorio correcto, ejecuta el siguiente comando para iniciar el bot:
+     ```bash
+     python TitanAI_trading_bot.py
+     ```
+   - Esto abrirá la interfaz gráfica de usuario (GUI) del bot.
+
+## Uso de la Interfaz Gráfica
+
+1. **Encabezado y Branding**:
+   - La interfaz gráfica muestra el nombre **TitanAI** y el branding **"Powered by Melano Inc®"**.
+
+2. **Configuración de Estrategias**:
+   - **Scalping**:
+     - Ingresa el precio de Bitcoin en el campo "Precio de BTC para Scalping".
+     - Ingresa la volatilidad esperada en el campo "Volatilidad para Scalping".
+     - Haz clic en el botón "Ejecutar Scalping" para realizar la operación.
+
+   - **Arbitraje**:
+     - Ingresa el precio de Bitcoin en Binance en "Precio BTC en Binance".
+     - Ingresa el precio en otro exchange en "Precio BTC en Otro Exchange".
+     - Haz clic en "Ejecutar Arbitraje" para realizar la operación.
+
+3. **Balance y Registro de Transacciones**:
+   - **Mostrar Balance**: Haz clic en el botón "Mostrar Balance" para ver el balance actual del bot.
+   - **Historial de Transacciones**: El historial de transacciones se mostrará en el cuadro de texto con scroll (historial). Cada operación incluye detalles de la transacción y cualquier ganancia generada.
+
+## Consejos
+
+- **Ejecuta el bot en una ventana de terminal separada** para poder monitorear fácilmente las operaciones.
+- **Prueba diferentes valores de volatilidad y precios** para observar cómo el bot toma decisiones de compra y venta.
+
+¡Ya estás listo para operar con **TitanAI**! Explora y ajusta la configuración de riesgo para optimizar las estrategias de trading.
